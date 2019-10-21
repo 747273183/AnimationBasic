@@ -2,7 +2,9 @@ package com.example.animationbasic;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,5 +12,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    public void onClick(View view) {
+        switch (view.getId())
+        {
+            case R.id.btn_frame_animation:
+                Intent intent=new Intent(MainActivity.this,FrameAnimationActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

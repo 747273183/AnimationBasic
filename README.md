@@ -34,6 +34,16 @@
 
 ![案例](readme/img/a0.png)
 
+3. 实现方法
+    -  使用AnimationDrawable来定义逐帧动画
+    
+    它是一个Drawable的容器,我们可以理解为它事先加载好了一系列图片.和普通的Drawable一样,它可以设置为视图对象的背景.
+    最简单的定义逐帧的方法就是在xml文件中通过<Animation-list>来定义AnimationDrawable对象.
+
+4. 代码实现
+    
+    FrameAnimationActivity
+
 ## 第三章 视图动画(重点)
 ### 3-1 视图动画-原理
 ### 3-2 视图动画-透明动画
