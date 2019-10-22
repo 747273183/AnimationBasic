@@ -45,15 +45,14 @@
    (1) 使用animation-list标签定义AnimationDrawable资源文件
    
    ```
-   <?xml version="1.0" encoding="utf-8"?>
+    <?xml version="1.0" encoding="utf-8"?>
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android" >
 <item android:drawable="@drawable/frame_1" android:duration="100" ></item>
     <item android:drawable="@drawable/frame_2" android:duration="100"></item>
     <item android:drawable="@drawable/frame_3" android:duration="100"></item>
 </animation-list>
-
    ```
-   
+
    (2) 将这个资源文件设置给一个view的backgroud
    (3) 获得这个view的background强转成AnimationDrawable
    (4)通过AimationDrawable对象的start方法启动动画,使用stop方法停止动画
