@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="1000"
+ >
+    <translate
+        android:repeatCount="infinite"
+        android:repeatMode="reverse"
+        android:fromXDelta="0"
+        android:fromYDelta="0"
+        android:toXDelta="50%p"
+        android:toYDelta="0"
+
+        />
+    <!--50%是相对于原点右移动控件宽度一半,50%是相对于原点右移动父控件的中间
+      android:repeatCount="1" 设置重复的次数    android:repeatCount="infinite" 表示无限次
+       android:repeatMode="reverse" 重复模式 来回,restart是每次从原点
+    -->
+</set>

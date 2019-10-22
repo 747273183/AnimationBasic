@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="1000"
+    android:fillAfter="true"
+    >
+<rotate
+    android:fromDegrees="0"
+    android:toDegrees="360"
+    android:repeatCount="3"
+    android:pivotY="50%"
+    android:pivotX="50%"
+    />
+    <!--
+    android:pivotY="50%"
+    android:pivotX="50%"
+    设置基准点在中间,默认在左上角
+-->
+
+</set>

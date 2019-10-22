@@ -1,10 +1,12 @@
-package com.example.animationbasic;
+package com.example.animationbasic.frame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.animationbasic.R;
 
 public class FrameAnimationActivity extends AppCompatActivity {
 
