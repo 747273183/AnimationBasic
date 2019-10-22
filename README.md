@@ -32,7 +32,7 @@
         逐帧动画又叫做图片动画,通过在一个固定区域一张一张的呈现事先准备好的一系列图片而产生动画效果.
 2. 案例展示
 
-![案例](/readme/img/a0.png)
+![案例](/readme/img/a0.gif)
 
 3. 实现方法
     -  使用AnimationDrawable来定义逐帧动画
@@ -40,9 +40,25 @@
     它是一个Drawable的容器,我们可以理解为它事先加载好了一系列图片.和普通的Drawable一样,它可以设置为视图对象的背景.
     最简单的定义逐帧的方法就是在xml文件中通过<Animation-list>来定义AnimationDrawable对象.
 
-4. 代码实现
+4. 关键实现步骤
     
-    FrameAnimationActivity
+   (1) 使用animation-list标签定义AnimationDrawable资源文件
+   
+   ```
+   <?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android" >
+<item android:drawable="@drawable/frame_1" android:duration="100" ></item>
+    <item android:drawable="@drawable/frame_2" android:duration="100"></item>
+    <item android:drawable="@drawable/frame_3" android:duration="100"></item>
+</animation-list>
+
+   ```
+   
+   (2) 将这个资源文件设置给一个view的backgroud
+   (3) 获得这个view的background强转成AnimationDrawable
+   (4)通过AimationDrawable对象的start方法启动动画,使用stop方法停止动画
+    
+    
 
 ## 第三章 视图动画(重点)
 ### 3-1 视图动画-原理

@@ -17,7 +17,7 @@ public class FrameAnimationActivity extends AppCompatActivity {
 
         View view=findViewById(R.id.view);
         animationDrawable = (AnimationDrawable) view.getBackground();
-        animationDrawable.setOneShot(true);//动一次
+//        animationDrawable.setOneShot(true);//动一次
     }
 
 
