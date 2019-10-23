@@ -260,10 +260,88 @@ animationDrawable.setOneShot(true);//动一次
 (2)使用AnimationUtils.loadAnimation加载动画       
 (3)调用view.startAnimation方法开启动画
 ### 3-7 选择练习
+
 ### 3-8 视图动画-插值器
+1. 介绍       
+大家回想一下刚才讲到的那些动画,是不是都是在一定时间内,某一个值发生了变化呢?
+以位移动画为例,就跟我们人在10秒钟移动10米是一样的,起始值是0,目标值是10,然后我们在十秒钟完成这个移动
+这就涉及到一个问题,我们以怎么样的速率移动呢?
+
+有线性的移动(匀速),也可是一开始慢,后来快,或者一开始快,后来慢,这就是动画涉及到的一个变化率的问题
+我们在定义动画时,可以为它指定变化率,来呈现不同的运动效果.
+
+插值器用于设置动画的变化速率.     
+2. 代码实现     
+(1)添加两个视图viewAccelerate,viewLinear          
+```
+<View
+            android:id="@+id/viewAcclerate"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/colorPrimary"
+            android:onClick="onClick"
+            android:layout_marginTop="10dp"
+            />
+
+        <View
+            android:id="@+id/viewLinear"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/colorAccent"
+            android:onClick="onClick"
+            android:layout_marginTop="10dp"
+            />
+```
+![插值器效果图](/readme/img/a3.png)
+(2)使用AnimationUtils.loadAnimation方法加载动画translate     
+分别设置一个AccelerateInterceptor和一个LinearInterceptor插值器      
+(3)启动两个动画   
+```
+    case R.id.viewLinear:
+                View view1=findViewById(R.id.viewAcclerate);
+                View view2=findViewById(R.id.viewLinear);
+
+                Animation animationAccelerate=AnimationUtils.loadAnimation(this,R.anim.translate);
+                Animation animationLinear=AnimationUtils.loadAnimation(this,R.anim.translate);
+
+                animationAccelerate.setInterpolator(new AccelerateInterpolator());
+                animationLinear.setInterpolator(new LinearInterpolator());
+
+                //启动
+                view1.startAnimation(animationAccelerate);
+                view2.startAnimation(animationLinear);
+
+                break;
+```
 ## 第四章 属性动画(重难点)
 ### 4-1 属性动画-原理
+1. 视图动画 vs 属性动画     
+(1)操作对象         
+        a. 视图动画只能操作视图对象,也就那些文本框控件,按钮控件,当然也可以是viewGroup(比如说LinearLayout等)
+        但是它不能操作其他的对象.       
+     ****   b. 而属性动画框架它就可以操作任意的对象.
+        回顾之前动画的本质中什么,就是你给我一个起始值,一个结果值,我能够让它平滑从起始值变化到结束值.        
+        那这就是一个动画系统了,在这个变化过程中,可以是变速也可以是匀速的.       
+        属性动画框架呢就可以操作任意对象,比如一个整型数,初始值0,结束值100,属性动画就可以控制这个整数值
+        在一定的时间内从0变化到100,这是视图动画做不到的.因为视图动画操作的对象是一个view.      
+(2)属性       
+    **a.** 视图动画并不没有真正改变视图的属性,以缩放效果为例,让它在x轴上缩放2倍,它是有了这样一个缩放的效果            
+    但当它缩完成后你去获得视图的宽度这个属性是没有真的变化的.      
+   **b.**  而属性动画就不一样了,属性是真正能改变属性的.可以说相当视图动画,属性动画更为强大,视图动画能实现的那些     
+    效果,属性动画都能实现.        
+    那是不是之前我们学习的视图动画就白学了呢?
+    并不是这样的,动画框架有变,甚至平台不同,但是动画的原理是不变的,动画的这些基础知识我们可以应用其他平台
+    ,比如说javaScript,只不过它的实现方式是和我们的属性动画更为接近的.因为它是不断的改变网页上元素的属性.       
+   **c.   现在我们来看一下通过属性动画框架我们能定义哪些动画属性**       
+   - 我们可以定义动画的**时长**.      
+   - 我们可以定义时间**插值器.**
+   - 允许我们定义动画的**重复次数以及重复模式**
+   - 允许我们定义**动画集**
+   - 我们还可以定义动画的**延迟**       
+    
+
 ### 4-2 属性动画-ValueAnimator
+
 ### 4-3 属性动画-ObjectAnimator
 ### 4-4 选择练习
 ### 4-5 属性动画-ViewPropertyAnimator

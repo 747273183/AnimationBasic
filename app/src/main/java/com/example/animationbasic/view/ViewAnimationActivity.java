@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +70,21 @@ public class ViewAnimationActivity extends AppCompatActivity {
             case  R.id.tv_set:
                 Animation setAnimation=  AnimationUtils.loadAnimation(this,R.anim.set);
                 view.startAnimation(setAnimation);
+                break;
+            case R.id.viewAcclerate:
+            case R.id.viewLinear:
+                View view1=findViewById(R.id.viewAcclerate);
+                View view2=findViewById(R.id.viewLinear);
+
+                Animation animationAccelerate=AnimationUtils.loadAnimation(this,R.anim.translate);
+                Animation animationLinear=AnimationUtils.loadAnimation(this,R.anim.translate);
+
+                animationAccelerate.setInterpolator(new AccelerateInterpolator());
+                animationLinear.setInterpolator(new LinearInterpolator());
+
+                view1.startAnimation(animationAccelerate);
+                view2.startAnimation(animationLinear);
+
                 break;
         }
     }
