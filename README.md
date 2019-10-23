@@ -292,6 +292,7 @@ animationDrawable.setOneShot(true);//动一次
             android:layout_marginTop="10dp"
             />
 ```
+
 ![插值器效果图](/readme/img/a3.png)           
 (2)使用AnimationUtils.loadAnimation方法加载动画translate     
 分别设置一个AccelerateInterceptor和一个LinearInterceptor插值器      
