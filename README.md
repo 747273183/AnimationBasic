@@ -31,7 +31,6 @@
         
         逐帧动画又叫做图片动画,通过在一个固定区域一张一张的呈现事先准备好的一系列图片而产生动画效果.
 2. 案例展示
-
 ![案例](/readme/img/a0.gif)
 
 3. 实现方法
@@ -292,7 +291,6 @@ animationDrawable.setOneShot(true);//动一次
             android:layout_marginTop="10dp"
             />
 ```
-
 ![插值器效果图](/readme/img/a3.png)           
 (2)使用AnimationUtils.loadAnimation方法加载动画translate     
 分别设置一个AccelerateInterceptor和一个LinearInterceptor插值器      
