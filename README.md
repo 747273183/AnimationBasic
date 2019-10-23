@@ -341,11 +341,134 @@ animationDrawable.setOneShot(true);//动一次
     
 
 ### 4-2 属性动画-ValueAnimator
+1. API说明        
+属性动画相关的类都被定义在android.animation包中        
+在这个包中有一个抽象类:Animator        
+Animator有一些子类:          
+- ValueAnimator
+2. 代码实现     
+(1)创建PropertyActivity类,添加相应的布局,布局上就只有一个go按钮     
+```
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".property.PropertyActivity">
 
+    <Button
+        android:id="@+id/btn_property"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="go"
+        />
+
+</LinearLayout>
+```
+(2)给go按钮添加单击事件      
+```
+ ValueAnimator valueAnimator=ValueAnimator.ofInt(0,100);
+                valueAnimator.setInterpolator(new LinearInterpolator());
+                valueAnimator.setDuration(1000);
+                valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        float animatedFraction = valueAnimator.getAnimatedFraction();
+                        int animatedValue = (int) valueAnimator.getAnimatedValue();
+                        Log.d(TAG, String.format("%.3f %d",animatedFraction,animatedValue));
+                    }
+                });
+                valueAnimator.start();
+```
 ### 4-3 属性动画-ObjectAnimator
+1. ObjectAnimator简介     
+ValueAnimator可以改变属性的值,可以是还是不够呀,单是改变属性的值,那你是改变哪个对象的属性的值呢,            
+我们知道属性都是隶属于对象的,ObjectAnimator就允许我们指定target,来说明我们改变哪个对象的属性的值     
+**ObjectAnimator是ValueAnimator的子类**     
+和视图动画类似,我们可以在java代码中来定义ObjectAnimator,也可以在资源文件中定义,
+如果是在资源文件中定义的话,我们使用objectAnimator标签,每个标签对应着一个ObjectAnimator对象        
+**在视图动画中,我们使用AnimatorUtils这个类来从资源文件中加载视图动画,而在属性动画中我们使用        
+AnimatorInflater这个类来从资源文件中加载属性动画.**   
+
+我们现在就写代码,看一下如何使用属性动画框架来让视图展现动画效果.           
+
+2. 代码实现    
+(1)定义属性动画的资源文件res/animator/alpha.xml   
+```
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+<objectAnimator
+    android:duration="1000"
+    android:propertyName="alpha"
+    android:valueType="floatType"
+    android:valueFrom="1.0"
+    android:valueTo="0.1"
+    />
+</set>
+```
+(2)使用AnimatorInflater.inflater方法加载属性动画
+```
+case R.id.tv_alpha:
+                //加载animator资源文件方式定义属性动画
+                Animator animator = AnimatorInflater.loadAnimator(this, R.animator.alpha);
+                animator.setTarget(view);
+                animator.start();
+                break;
+```
+(3)使用java代码创建属性动画
+```
+    case R.id.tv_scale:
+                ObjectAnimator.ofFloat(view,"scaleX",1.0f,3.0f).start();//使用java代码定义属性动画
+
+                break;
+```
 ### 4-4 选择练习
 ### 4-5 属性动画-ViewPropertyAnimator
+1. ViewPropertyAnimator介绍       
+虽然说属性动画可以让任何对象产生动画,而不只局限于视图对象,但是大多数情况下我们还是让视图动起来        
+**Anroid中提代了一个专门让视图产生动画的类ViewPropertyAnimator**
+它是专门用于调节视图属性的值的,我们可以通过
+view.animate()获得一个ViewPropertyAniato r对象
+```
+view.animate().translationX(100f).start();
+```
+再调用不同的方法就能不断的控制视图的属性,让它产生动画的效果.         
+这样就让这个视图动画定义起来比较容易.咱们现在就来实践一下.      
+2. 代码实现     
+```
+ case R.id.tv_translate:
+                //如果是让一个视图动起来,我们可以直接使用view类中的animate()获得一个ViewPropertyAnimator对象
+                //再调用相应的属性方法
+                view.animate().translationX(5000).setDuration(1000).start();
+                break;
+
+```
 ### 4-6 属性动画-AnimatorSet
+```
+ case R.id.tv_set:
+//                //创建一个旋转动画者
+//                Animator rotationAnimator=ObjectAnimator.ofFloat(view,"rotation",0,720);
+//                //创建一个位移动画者
+//                Animator translateAnimator = ObjectAnimator.ofFloat(view, "x", 0, 500);
+//
+//                //让两个动画一起播放
+//                AnimatorSet set=new AnimatorSet();
+////                set.playTogether(rotationAnimator,translateAnimator);
+//                //让两动画按顺序播放
+//                set.playSequentially(rotationAnimator,translateAnimator);
+//                //开始
+//                set.start();
+
+                //第二种简化方式
+                view.animate().rotation(720).setDuration(1000).start();
+                view.animate().translationX(500).setDuration(1000).setStartDelay(1000).start();
+                break;
+```
 ### 4-7 选择练习
 ## 第五章 课程总结
 ### 5-1 课程总结
+1. 如果有图片可以使用逐帧动画
+2. 视图动画和属性动画的区别         
+属性动画可以完成视图动画所有的功能,属性动画可以真实的改变视图对象的值.
